@@ -1,0 +1,116 @@
+/* fade transition css */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* v-navigation-drawer 공통 css */
+.v-navigation-drawer {
+    box-shadow: 0 2px 10px -1px rgba(85, 85, 85, 0.08),
+    0 1px 10px 0 rgba(85, 85, 85, 0.06), 0 1px 30px 0 rgba(85, 85, 85, 0.03) !important;
+}
+
+/* v-card 공통 css */
+.v-card {
+    box-shadow: 0 3px 10px -2px rgb(85 85 85 / 8%), 0 2px 20px 0 rgb(85 85 85 / 6%), 0 1px 30px 0 rgb(85 85 85 / 3%) !important;
+}
+
+/* v-data-table 모바일 css */
+.mobile {
+    color: #333;
+}
+
+@media screen and (max-width: 768px) {
+    .mobile.v-table table tr {
+        max-width: 100%;
+        position: relative;
+        display: block;
+    }
+
+    .mobile.v-table table thead {
+        display: none;
+    }
+
+    .mobile.v-table table tr:nth-child(odd) {
+        border-left: 6px solid rgb(var(--v-theme-primary)) !important;
+    }
+
+    .mobile.v-table table tr:nth-child(even) {
+        border-left: 6px solid rgb(var(--v-theme-secondary)) !important;;
+    }
+
+    .mobile.v-table table tr td {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid #f5f5f5;
+        height: auto !important;
+        padding: 10px !important;
+    }
+
+    .mobile.v-table table tr td ul li:before {
+        content: attr(data-label);
+        padding-right: .5em;
+        text-align: left;
+        display: block;
+        color: #999;
+
+    }
+    .v-datatable__actions__select {
+        width: 50%;
+        margin: 0px;
+        justify-content: flex-start;
+    }
+    .mobile.v-table .theme--light.v-table tbody tr:hover:not(.v-datatable__expand-row) {
+        background: transparent;
+    }
+
+}
+
+.flex-content {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.flex-item {
+    padding: 5px;
+    width: 100%;
+    height: 60px;
+    font-weight: bold;
+}
+
+/* v-data-table css */
+$--v-table-row-height: 10px;
+.v-table table {
+    padding: 0 4px 8px 4px;
+}
+.v-table tbody tr {
+    transition: box-shadow .2s,transform .2s;
+}
+.v-table tbody tr:hover {
+    box-shadow: 0 3px 15px -2px rgb(0 0 0 / 12%);
+    transform: translateY(-4px);
+}
+.v-table tbody tr td {
+    height: 48px !important;
+    font-size: 0.875rem;
+    border-bottom: none !important;
+}
+
+.v-table thead tr th {
+    height: 48px !important;
+    font-size: 0.875rem;
+    border-bottom: thin solid rgba(0,0,0,.05) !important;
+}
+
+.v-table .v-data-table-footer {
+    border-top: thin solid rgba(0,0,0,.05) !important;
+}
