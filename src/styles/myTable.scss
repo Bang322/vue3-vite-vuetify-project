@@ -1,7 +1,7 @@
 .my-table-wrap {
     .my-table {
         padding: 0 4px 8px 4px;
-        height: calc(100% - 57px);
+        //height: calc(100% - 57px);
 
         .my-table-tr {
             display: flex;
@@ -9,6 +9,7 @@
 
         .my-table-head {
             .my-table-tr {
+                position: relative;
                 border-bottom: thin solid rgba(0, 0, 0, 0.05);
             }
             .my-table-th {
@@ -73,14 +74,12 @@
             &:not(.no-data) {
                 cursor: pointer;
             }
-            &.no-data td {
-                opacity: .5;
-            }
-
-            td {
-                height: 48px;
+            &.no-data {
+                justify-content: center;
+                align-items: center;
                 font-size: 0.875rem;
-                padding: 0 16px;
+                height: 48px;
+                opacity: .5;
             }
         }
 
@@ -107,6 +106,12 @@
             .mobile-header {
                 font-weight: bold;
             }
+        }
+
+        .my-table-loading {
+            top: unset !important;
+            bottom: 0;
+            position: absolute;
         }
     }
 
@@ -146,6 +151,14 @@
         > div {
             flex: 0 0 auto;
             padding: 10px 12px;
+        }
+    }
+
+    &.loading {
+        pointer-events: none;
+
+        .my-table-th, .my-table-td, .my-table-footer {
+            opacity: .3;
         }
     }
 }

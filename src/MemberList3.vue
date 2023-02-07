@@ -11,13 +11,32 @@
         </v-breadcrumbs>
 
         <v-card>
-            <MyTable2
+            <v-row
+                class="my-table-tool"
+                style="padding: 20px"
+                no-gutters
+                justify="end"
+            >
+                <v-col cols="4">
+                    <v-text-field
+                        v-model="search"
+                        hide-details
+                        density="compact"
+                        variant="underlined"
+                        append-inner-icon="mdi-magnify"
+                        placeholder="검색"
+                        clearable
+                    />
+                </v-col>
+            </v-row>
+            <MyTable
                 v-model="selected"
                 :items="items"
                 :headers="headers"
                 show-select
-                height="100%"
-                item-key="id"
+                :search="search"
+                height="auto"
+                item-key="userId"
                 @click:row="onClickRow"
             >
                 <template #item.id="{ item }">
@@ -30,28 +49,29 @@
                     <span style="color: blue">{{ item.userId }}</span>
                 </template>
 
-                <template #no-data> 검색된 값이 없습니다. </template>
-            </MyTable2>
+                <template #no-data>검색된 값이 없습니다.</template>
+            </MyTable>
         </v-card>
     </v-container>
 </template>
 
 <script>
-import MyTable2 from '@/components/MyTable2.vue';
+import MyTable from '@/components/MyTable.vue';
 
 export default {
     name: 'MemberList',
-    components: { MyTable2 },
+    components: { MyTable },
     data() {
         return {
             selected: [],
+            search: '',
             headers: [
                 {
                     text: 'ID',
                     align: 'start',
                     sortable: true,
                     key: 'id',
-                    width: 120
+                    width: '200px'
                 },
                 {
                     text: 'USER ID',
@@ -145,18 +165,24 @@ export default {
                     userId: 'tester11',
                     name: '테스터11',
                     email: 'tester11@gmail.com'
+                },
+                {
+                    id: 13,
+                    userId: 'bang',
+                    name: 'bang',
+                    email: 'bang@gmail.com'
                 }
             ]
         };
     },
     watch: {
         selected(value) {
-            console.log('selected', value);
+            console.log('부모 컴포넌트에서 체크박스값 확인', value.join(','));
         }
     },
     methods: {
         onClickRow(row) {
-            console.log('클릭한 row key', row.id);
+            console.log('부모 컴포넌트에서 클릭한 row 확인', row);
         }
     }
 };
