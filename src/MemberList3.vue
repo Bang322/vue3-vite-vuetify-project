@@ -36,7 +36,7 @@
                 show-select
                 :search="search"
                 height="auto"
-                item-key="userId"
+                item-key="id"
                 @click:row="onClickRow"
             >
                 <template #item.id="{ item }">

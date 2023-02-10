@@ -384,7 +384,7 @@ export default {
         },
         // sorting 과 paging 을 적용한 새로운 배열 return
         pageItems() {
-            let pageItems = this.searchItems;
+            let pageItems = [...this.searchItems];
 
             if (this.sort.key && this.sort.type) {
                 const sortFunction = (a, b) => {
