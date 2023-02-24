@@ -42,16 +42,46 @@
             density="compact"
             nav
         >
-            <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-                :value="item"
-                link
-                :to="item.to"
-                :title="item.text"
-                active-color="primary"
-                :prepend-icon="item.icon"
-            />
+            <template
+                v-for="menu in getMenus"
+                :key="menu.menuId"
+            >
+                <template v-if="menu.useYn === 'Y'">
+                    <v-list-item
+                        v-if="!menu.children && menu.path"
+                        :value="menu"
+                        link
+                        :to="menu.path"
+                        :title="menu.name"
+                        active-color="primary"
+                        :prepend-icon="menu.icon"
+                    />
+
+                    <v-list-group
+                        v-else-if="menu.children"
+                        :value="menu.name"
+                    >
+                        <template #activator="{ props }">
+                            <v-list-item
+                                v-bind="props"
+                                :prepend-icon="menu.icon"
+                                :title="menu.name"
+                                active-color="primary"
+                            />
+                        </template>
+
+                        <v-list-item
+                            v-for="child in menu.children"
+                            :key="child.menuId"
+                            :prepend-icon="child.icon"
+                            :title="child.name"
+                            link
+                            :to="child.path"
+                            active-color="primary"
+                        />
+                    </v-list-group>
+                </template>
+            </template>
         </v-list>
     </v-navigation-drawer>
 
@@ -71,48 +101,13 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex';
+
+const { mapGetters, mapActions } = createNamespacedHelpers('settings');
 export default {
     name: 'MainLayout',
     data: () => ({
         drawer: true,
-        items: [
-            { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/dashboard' },
-            {
-                text: '멤버관리',
-                icon: 'mdi-account-edit',
-                to: '/member'
-            },
-            {
-                text: '멤버관리2',
-                icon: 'mdi-account-edit',
-                to: '/member2'
-            },
-            {
-                text: '멤버관리3',
-                icon: 'mdi-account-edit',
-                to: '/member3'
-            },
-            {
-                text: 'GridListPage',
-                icon: 'mdi-clipboard',
-                to: '/gridListPage'
-            },
-            {
-                text: 'Breakpoints',
-                icon: 'mdi-monitor',
-                to: '/breakpoints'
-            },
-            {
-                text: 'typography',
-                icon: 'mdi-ab-testing',
-                to: '/typography'
-            },
-            {
-                text: 'DataTable',
-                icon: 'mdi-table',
-                to: '/dataTable'
-            }
-        ],
         toolbarMenu: [
             {
                 text: '내정보',
@@ -124,7 +119,15 @@ export default {
             }
         ]
     }),
+    computed: {
+        ...mapGetters(['getMenus'])
+    },
+    created() {
+        // store 에서 관리되고있는 데이터를 사용하되, 원래 데이터가 변경되지 않도록 복사하여 사용
+        this.fetchMenus();
+    },
     methods: {
+        ...mapActions(['fetchMenus']),
         onToolbarMenuClick(value) {
             if (value === '로그아웃') {
                 this.$router.replace('/login');

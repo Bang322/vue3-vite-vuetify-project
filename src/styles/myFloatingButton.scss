@@ -1,0 +1,119 @@
+.fab-main-container {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    user-select: none;
+
+    .fab-container {
+        display: flex;
+        justify-content: center;
+        box-shadow: rgb(102 102 102) 0px 2px 8px;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        color: white;
+        background-color: rgb(var(--v-theme-primary));
+        cursor: pointer;
+
+        .fab-icon {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+
+            &.fab-active {
+                transform: rotate(45deg);
+            }
+        }
+
+        .fab-icon-mask {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0;
+            transition: all .3s;
+        }
+
+        &:active {
+            .fab-icon-mask {
+                opacity: .25;
+            }
+        }
+    }
+
+    .fab-item-container {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        .fab-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            margin-left: 10%;
+
+            .fab-title {
+                box-shadow: 0 3px 10px -2px rgb(85 85 85 / 8%), 0 2px 20px 0 rgb(85 85 85 / 6%), 0 1px 30px 0 rgb(85 85 85 / 3%) !important;
+                font-size: .8em;
+                white-space: nowrap;
+                background-color: white;
+                color: rgb(102, 102, 102);
+                position: absolute;
+                right: 4em;
+                padding: 2px 5px;
+                border-radius: 2px;
+            }
+        }
+    }
+
+    /* floating action button transition 효과 설정 */
+    .fab-leave-active,
+    .fab-enter-active,
+    .fab-active-leave-active,
+    .fab-active-enter-active {
+        transition: all .3s;
+    }
+
+    .fab-item-enter-active {
+        transition: all .2s linear;
+    }
+    .fab-item-leave-active {
+        transition: all .2s linear;
+        transition-delay: 0s !important;
+    }
+
+    .fab-enter-from, .fab-leave-to {
+        transform: rotate(45deg);
+        opacity: 0;
+    }
+
+    .fab-active-enter-to {
+        transform: rotate(45deg);
+    }
+
+    .fab-active-leave-to {
+        opacity: 0;
+    }
+
+    .fab-item-enter-from {
+        opacity: 0;
+        transform: translate3d(0, 5px, 0) scale(0);
+    }
+    .fab-item-leave-to {
+        opacity: 0;
+    }
+}

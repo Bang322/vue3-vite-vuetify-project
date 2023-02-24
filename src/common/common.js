@@ -38,5 +38,20 @@ export default {
     // overlay hide 메소드
     async hideOverlay() {
         await store.dispatch('app/setOverlay', { show: false });
+    },
+
+    // confirm dialog show 메소드
+    async showConfirm(message, okCallback, cancelCallback, options) {
+        await store.dispatch('app/setConfirm', {
+            show: true,
+            message,
+            options,
+            okCallback,
+            cancelCallback
+        });
+    },
+    // confirm dialog hide 메소드
+    async hideConfirm() {
+        await store.dispatch('app/setConfirm', { show: false });
     }
 };

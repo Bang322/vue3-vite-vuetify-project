@@ -1,6 +1,9 @@
 <template>
     <v-container fluid>
-        <v-btn @click="$common.showSuccessSnackbar('성공했습니다.')">
+        <v-btn
+            color="primary"
+            @click="$common.showSuccessSnackbar('성공했습니다.')"
+        >
             스낵바
         </v-btn>
         <v-btn @click="$common.showErrorSnackbar('실패했습니다.')">

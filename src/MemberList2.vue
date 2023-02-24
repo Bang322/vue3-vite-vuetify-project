@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import MyTable from '@/components/MyTable.vue';
+import MyTable from '@/components/MyTableTest.vue';
 
 export default {
     name: 'MemberList',

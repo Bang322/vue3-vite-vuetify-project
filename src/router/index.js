@@ -5,6 +5,7 @@ import LoginForm from '@/views/login/LoginForm.vue';
 import MemberList from '@/views/member/MemberList.vue';
 import MemberList2 from '@/MemberList2.vue';
 import MemberList3 from '@/MemberList3.vue';
+import MenuSetting from '@/views/settings/MenuSetting.vue';
 
 const routes = [
     {
@@ -39,6 +40,11 @@ const routes = [
         path: '/member3',
         name: 'Member3',
         component: MemberList3
+    },
+    {
+        path: '/menuSetting',
+        name: 'MenuSetting',
+        component: MenuSetting
     }
 ];
 

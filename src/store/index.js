@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import member from '@/store/modules/member';
 import app from '@/store/modules/app';
+import settings from '@/store/modules/settings';
 
 export default createStore({
     state: {
@@ -16,6 +17,7 @@ export default createStore({
     },
     modules: {
         member,
-        app
+        app,
+        settings
     }
 });

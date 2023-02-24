@@ -47,6 +47,36 @@
                 size="64"
             />
         </v-overlay>
+
+        <v-dialog
+            v-model="confirm.show"
+            class="confirm-dialog"
+            width="auto"
+        >
+            <v-card>
+                <div class="confirm-border" />
+                <div class="confirm-content">{{ confirm.message }}</div>
+                <div
+                    class="d-flex justify-end align-center confirm-btn-container pa-2"
+                >
+                    <v-btn
+                        class="mr-1"
+                        color="primary"
+                        variant="text"
+                        @click="onOkConfirm"
+                    >
+                        확인
+                    </v-btn>
+                    <v-btn
+                        color="error"
+                        variant="text"
+                        @click="onCancelConfirm"
+                    >
+                        취소
+                    </v-btn>
+                </div>
+            </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -58,7 +88,21 @@ const { mapState } = createNamespacedHelpers('app');
 export default {
     name: 'App',
     computed: {
-        ...mapState(['snackbar', 'overlay'])
+        ...mapState(['snackbar', 'overlay', 'confirm'])
+    },
+    methods: {
+        onOkConfirm() {
+            if (typeof this.confirm.okCallback === 'function') {
+                this.confirm.okCallback();
+            }
+            this.$common.hideConfirm();
+        },
+        onCancelConfirm() {
+            if (typeof this.confirm.cancelCallback === 'function') {
+                this.confirm.cancelCallback();
+            }
+            this.$common.hideConfirm();
+        }
     }
 };
 </script>
